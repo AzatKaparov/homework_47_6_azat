@@ -5,25 +5,30 @@
     <link rel="stylesheet" href="/source/webapp/static/css/add.css">
 {% endblock %}
 
+{% block menu %}<li><a href="{% url "task_view" task.pk %}">Отмена</a></li> {% endblock %}
+
 {% block content %}
     <h1>Добавить задачу</h1>
     <form action="{% url 'task_update' task.pk%}" method="post">
         {% csrf_token %}
         <label>Описание</label><br/>
-        <input type="text" name="description" value="{{ task.description }}"/><br/>
+        <input type="text" name="description" value="{{ task.description }}" required/><br/>
+        {% if errors.description %} <p class="error">{{ errors.description }}</p>{% endif %}
 
         <label>Дата (ГГГГ-ММ-ДД)</label><br/>
-        <input type="text" name="date" value="{{ task.date }}"/><br/>
+        <input type="text" name="date" value="{{ task.date }}" required /><br/>
+        {% if errors.date %}<p class="error">{{ errors.date }}</p>{% endif %}
 
         <label for="id-status">Статус:</label><br/>
         <select name="status" id="id-status">
             {% for value, label in status_choices %}
                 <option value="{{ value }}"
-                        {% if value == task.value %} {% endif %}>{{ label }}</option>
+                        {% if value == task.status %} {% endif %}>{{ label }}</option>
             {% endfor %}
         </select><br/>
         <p>Более подробное описание (необязательно)</p>
         <p><textarea rows="10" cols="60" name="more">{{ task.more }}</textarea></p>
+        {% if errors.more %}<p class="error">{{ errors.more }}</p>{% endif %}
         <br/>
         <input type="submit" value="Send"/>
     </form>

@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="/source/webapp/static/css/view.css">
 {% endblock %}
 
+{% block menu %}<li><a href="{% url "task_update" task.pk %}">Обновить</a></li> {% endblock %}
+
 {% block content %}
     <h1>{{ task.description }}</h1>
     <p>{{ task.get_status_display }}</p>

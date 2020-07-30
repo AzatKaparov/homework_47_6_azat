@@ -27,3 +27,8 @@ a {
 h1 {
     margin-top: 80px;
 }
+
+.error {
+    color: red;
+    font-size: 16px;
+}
