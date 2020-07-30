@@ -85,7 +85,39 @@ def task_update_view(request, pk):
         else:
             return render(request, 'update.html', context={
                 'task': task,
-                'form': form
+                'form': form,
+                'errors': form.errors
             })
     else:
         return HttpResponseNotAllowed(permitted_methods=['GET', 'POST'])
+
+
+# def task_update_view(request, pk):
+#     task = get_object_or_404(Task, pk=pk)
+#     if request.method =='GET':
+#         return render(request, 'update.html', context={
+#             'status_choices': STATUS_CHOICES,
+#             'task': task,
+#         })
+#     elif request.method =='POST':
+#         errors = {}
+#         task.description = request.POST.get('description')
+#         if not task.description:
+#             errors['description'] = "Это поле обязательно!"
+#         task.status = request.POST.get('status')
+#         if not task.status:
+#             errors['status'] = "Это поле обязательно!"
+#         task.date = request.POST.get('date')
+#         if not task.date:
+#             errors['date'] = "Это поле обязательно!"
+#         task.more = request.POST.get('more')
+#
+#         if errors:
+#             return render(request, 'update.html', context={
+#                 'status_choices': STATUS_CHOICES,
+#                 'task': task,
+#                 'errors': errors,
+#             })
+#         task.save()
+#
+#         return redirect('task_view', pk=task.pk)
