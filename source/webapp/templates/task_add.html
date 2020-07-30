@@ -9,20 +9,11 @@
     <h1>Добавить задачу</h1>
     <form action="{% url 'task_add' %}" method="post">
         {% csrf_token %}
-        <label>Описание</label><br/>
-        <input type="text" name="description"/><br/>
 
-        <label>Дата (ГГГГ-ММ-ДД)</label><br/>
-        <input type="text" name="date"/><br/>
-
-        <label for="id-status">Статус:</label><br/>
-        <select name="status" id="id-status">
-            {% for value, label in status_choices %}
-                <option value="{{ value }}">{{ label }}</option>
-            {% endfor %}
-        </select><br/>
-        <p>Более подробное описание (необязательно)</p>
-        <p><textarea rows="10" cols="60" name="more"></textarea></p>
+        {% include 'partial/form_field.html' with field=form.description %}
+        {% include 'partial/form_field.html' with field=form.date %}
+        {% include 'partial/form_field.html' with field=form.status %}
+        {% include 'partial/form_field.html' with field=form.more %}
         <br/>
         <input type="submit" value="Send"/>
     </form>
