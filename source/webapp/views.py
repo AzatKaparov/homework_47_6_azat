@@ -39,3 +39,20 @@ def task_view(request, pk):
     task = get_object_or_404(Task, pk=pk)
     context = {'task': task}
     return render(request, 'task_view.html', context)
+
+
+def task_update_view(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method =='GET':
+        return render(request, 'update.hmtl', context={
+            'status_choices': STATUS_CHOICES,
+            'task': task,
+        })
+    elif request.method =='POST':
+        task.description = request.POST.get('description')
+        task.status = request.POST.get('status')
+        task.date = request.POST.get('date')
+        task.more = request.POST.get('more')
+        task.save()
+
+        return redirect('task_view', pk=task.pk)

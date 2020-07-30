@@ -26,6 +26,16 @@ a {
     background-color: cornflowerblue;
 }
 
+#update {
+    text-decoration: none;
+    color: white;
+    display: block;
+    text-transform: uppercase;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: cornflowerblue;
+}
+
 .task {
     border: solid 1px black;
     display: inline-block;
