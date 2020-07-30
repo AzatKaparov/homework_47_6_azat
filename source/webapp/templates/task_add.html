@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Create{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="/source/webapp/static/css/add.css">
+{% endblock %}
+
+{% block content %}
+    <h1>Добавить задачу</h1>
+    <form action="{% url 'task_add' %}" method="post">
+        {% csrf_token %}
+        <label>Описание</label><br/>
+        <input type="text" name="description"/><br/>
+
+        <label>Дата (ГГГГ-ММ-ДД)</label><br/>
+        <input type="text" name="date"/><br/>
+
+        <label for="id-status">Статус:</label><br/>
+        <select name="status" id="id-status">
+            {% for value, label in status_choices %}
+                <option value="{{ value }}">{{ label }}</option>
+            {% endfor %}
+        </select><br/>
+        <p>Более подробное описание (необязательно)</p>
+        <p><textarea rows="10" cols="60" name="more"></textarea></p>
+        <br/>
+        <input type="submit" value="Send"/>
+    </form>
+{% endblock %}

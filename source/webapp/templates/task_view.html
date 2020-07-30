@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}View{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="/source/webapp/static/css/view.css">
+{% endblock %}
+
+{% block content %}
+    <h1>{{ task.description }}</h1>
+    <p>{{ task.get_status_display }}</p>
+    <p>{{ task.date }}</p>
+    <p>{{ task.more }}</p>
+    <p><a href="{% url 'index' %}">На главную</a></p>
+{% endblock %}

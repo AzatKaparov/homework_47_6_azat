@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <h1>Задачи</h1>
+    <p><a href="{% url 'task_add' %}">Добавить задачу</a></p>
+        {% for i in tasks %}
+            <div class="task">
+                <h3>{{ i.pk }}  {{ i.description }}</h3>
+                <p>Статус: {{ i.get_status_display }}</p>
+                <p class="date">{{ i.date }}</p>
+                <a id="delete" href="delete/{{i.pk}}">Удалить</a>
+                <a id="more" href="{% url "task_view" i.pk %}">More...</a>
+            </div>
+        {% endfor %}
+{% endblock %}
